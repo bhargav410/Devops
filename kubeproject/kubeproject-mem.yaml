@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubeprojectmem
+  namespace: kubeproject
+spec:
+  selector:
+    matchLabels:         
+      app: vpromc
+  replicas: 1    
+  template:
+    metadata:
+      labels:
+        app: vpromc
+    spec:
+      containers:
+      - name: memcontainer
+        image: memcached
+        ports:
+        - name: memcache   
+          containerPort: 11211

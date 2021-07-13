@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vproapp
+  namespace: kubeproject
+spec:
+  selector:
+    matchLabels:         
+      app: vproapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vproapp
+    spec:
+      containers:
+      - name: appcontainer
+        image: devopsmakeit/bhargavapp:V1
+        ports:
+        - name: app-port
+          containerPort: 8080
+      initContainers:    
+      - name: db-validation
+        image: busybox
+        command: ['sh', '-c', 'until nslookup vprodb; do echo conneting to db; sleep 2; done;'] 
+      - name: cache-validation
+        image: busybox
+        command: ['sh', '-c', 'until nslookup vprocache01; do echo conneting to cache; sleep 2; done;'] 

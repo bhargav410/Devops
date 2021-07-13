@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpromq01
+  namespace: kubeproject
+spec:
+  selector:
+    matchLabels:         
+      app: vpromq01
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vpromq01
+    spec:
+      containers:
+      - name: rmqcontainer
+        image: rabbitmq
+        ports:
+        - name: rabbitmqport      
+          containerPort: 15627
+        env:
+        - name: RABBITMQ_DEFAULT_PASS
+          valueFrom:
+            secretKeyRef:
+              name: db-rab-secret
+              key: rab_pass
+        - name: RABBITMQ_DEFAULT_USER
+          value: "guest"        

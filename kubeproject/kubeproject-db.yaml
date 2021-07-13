@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubeprojectdb
+  namespace: kubeproject
+spec:
+  replicas: 1      
+  selector:
+    matchLabels:         
+      app: vprodb
+  template:
+    metadata:
+      labels:
+        app: vprodb
+    spec:
+      containers:
+      - name: dbcontainer
+        image: devopsmakeit/bhargavdb:V1
+        ports:
+        - name: mysqlport        
+          containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-rab-secret      
+              key: db_pass

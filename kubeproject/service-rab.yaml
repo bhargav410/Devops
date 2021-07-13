@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vpromq01
+  namespace: kubeproject
+spec:
+  selector:
+    app: vpromq01
+  ports:
+  - protocol: TCP
+    port: 15627
+    targetPort: 15627
+  type: ClusterIP
+

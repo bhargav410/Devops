@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-rab-secret
+  namespace: kubeproject
+stringData:
+  db_pass: vprodbpass
+  rab_pass: guest  

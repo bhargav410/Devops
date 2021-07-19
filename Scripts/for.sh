@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRPPATH="/home/ubuntu/scripting/setupremote.sh"
+TestSCRPPATH="/home/ubuntu/scripting/setupremote.sh"
 USR="root"
 ping -c 3 master
 if [ $? -eq 0 ]
